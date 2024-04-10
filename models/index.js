@@ -1,7 +1,11 @@
-const { Train } = require('./train');
-const { Admin } = require('./admin');
+const { User } = require('./user');
+const { Company } = require('./company');
+const { TranslationKey } = require('./translationKey');
+const { TranslationValue } = require('./translationValue');
 
 module.exports = {
-  Train,
-  Admin,
+  User,
+  Company,
+  TranslationKey,
+  TranslationValue,
 };
