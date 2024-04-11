@@ -5,7 +5,7 @@ const emailRegexp = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/;
 const passwordRegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/;
 
-const adminSchema = Schema(
+const userSchema = Schema(
   {
     email: {
       type: String,
@@ -21,9 +21,9 @@ const adminSchema = Schema(
       type: String,
       required: [true, 'Your name is required'],
     },
-    token: {
+    accessLevel: {
       type: String,
-      default: null,
+      default: 'restricted',
     },
   },
   { versionKey: false, timestamps: true },
@@ -40,10 +40,10 @@ const joiLoginSchema = Joi.object({
   password: Joi.string().pattern(passwordRegExp).required(),
 });
 
-const Admin = model('admin', adminSchema);
+const User = model('user', userSchema);
 
 module.exports = {
-  Admin,
+  User: User,
   joiRegisterSchema,
   joiLoginSchema,
 };

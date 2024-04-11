@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const { Unauthorized } = require('http-errors');
+const { Unauthorized, Forbidden } = require('http-errors');
 
-const { Admin } = require('../models');
+const { User, Company } = require('../models');
 const { SECRET_KEY } = process.env;
 
 const authenticate = async (req, res, next) => {
@@ -15,10 +15,22 @@ const authenticate = async (req, res, next) => {
       throw new Unauthorized('Not authorized');
     }
 
-    jwt.verify(token, SECRET_KEY);
-    const admin = await Admin.findOne({ token });
-    if (!admin) {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const user = await User.findById(decoded.id)
+    if (!user) {
       throw new Unauthorized('Not authorized');
+    }
+    const {userId, companyId} = req.params;
+    if(userId || companyId) {
+      if (userId && decoded.id !== userId) {
+        throw new Unauthorized('Not authorized');
+      }
+      if (companyId) {
+        const company = await Company.findOne(companyId)
+        if(!company || company.user._id.toString() !== decoded.id) {
+          throw new Forbidden('Forbidden');
+        }
+      }
     }
     
     const TokenExpired = isTokenExpired(token);
