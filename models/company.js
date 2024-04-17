@@ -15,6 +15,10 @@ const companySchema = Schema(
       type: String,
       required: [true, 'Specify project description'],
     },
+    apiKey: {
+      type: String,
+      default: '',
+    },
   },
   { versionKey: false, timestamps: true },
 );

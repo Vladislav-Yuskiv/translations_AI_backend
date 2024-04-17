@@ -14,21 +14,22 @@ const authenticate = async (req, res, next) => {
     if (bearer !== 'Bearer') {
       throw new Unauthorized('Not authorized');
     }
-
     const decoded = jwt.verify(token, SECRET_KEY);
+    console.log(decoded.id);
     const user = await User.findById(decoded.id)
+    console.log(user);
     if (!user) {
       throw new Unauthorized('Not authorized');
     }
     const {userId, companyId} = req.params;
     if(userId || companyId) {
       if (userId && decoded.id !== userId) {
-        throw new Unauthorized('Not authorized');
+        throw new Forbidden('Forbidden resource');
       }
       if (companyId) {
         const company = await Company.findOne(companyId)
         if(!company || company.user._id.toString() !== decoded.id) {
-          throw new Forbidden('Forbidden');
+          throw new Forbidden('Forbidden resource');
         }
       }
     }
@@ -41,6 +42,7 @@ const authenticate = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
+    console.log(error);
     if (!error.status) {
       error.status = 401;
       error.message = 'Not authorized (invalid access token)';
