@@ -3,11 +3,11 @@ const Joi = require('joi');
 
 const translationKeySchema = Schema(
   {
-    keyName: {
+    name: {
       type: String,
       required: [true, 'Key name is required'],
     },
-    keyDescription: {
+    description: {
       type: String,
       required: [true, 'Key description is required'],
     },
@@ -20,9 +20,11 @@ const translationKeySchema = Schema(
   { versionKey: false, timestamps: true },
 );
 
+translationKeySchema.index({ name: 1, company: 1 }, { unique: true });
+
 const schemaValidateTranslationKey = Joi.object({
-  keyName: Joi.string().required(),
-  keyDescription: Joi.string().required(),
+  name: Joi.string().required(),
+  description: Joi.string().required(),
   company: Joi.string().required(),
 })
 
