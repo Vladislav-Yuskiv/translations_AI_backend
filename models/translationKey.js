@@ -11,21 +11,21 @@ const translationKeySchema = Schema(
       type: String,
       required: [true, 'Key description is required'],
     },
-    company:{
+    translationBundle:{
       type: Schema.Types.ObjectId,
-      required: [true, 'Specify related company'],
-      ref: 'company',
+      required: [true, 'Specify related translationBundle'],
+      ref: 'translationBundle',
     },
   },
   { versionKey: false, timestamps: true },
 );
 
-translationKeySchema.index({ name: 1, company: 1 }, { unique: true });
+translationKeySchema.index({ name: 1, translationBundle: 1 }, { unique: true });
 
 const schemaValidateTranslationKey = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
-  company: Joi.string().required(),
+  translationBundle: Joi.string().required(),
 })
 
 const TranslationKey = model('translationKey', translationKeySchema);

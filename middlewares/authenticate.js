@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const { Unauthorized, Forbidden } = require('http-errors');
+const { Unauthorized, Forbidden ,NotFound} = require('http-errors');
 
-const { User, Company } = require('../models');
+const { User, TranslationBundle } = require('../models');
 const { SECRET_KEY } = process.env;
 
 const authenticate = async (req, res, next) => {
@@ -17,18 +17,17 @@ const authenticate = async (req, res, next) => {
     const decoded = jwt.verify(token, SECRET_KEY);
     console.log(decoded.id);
     const user = await User.findById(decoded.id)
-    console.log(user);
     if (!user) {
-      throw new Unauthorized('Not authorized');
+      throw new NotFound('User not found');
     }
-    const {userId, companyId} = req.params;
-    if(userId || companyId) {
+    const {userId, translationBundleId} = req.params;
+    if(userId || translationBundleId) {
       if (userId && decoded.id !== userId) {
         throw new Forbidden('Forbidden resource');
       }
-      if (companyId) {
-        const company = await Company.findOne(companyId)
-        if(!company || company.user._id.toString() !== decoded.id) {
+      if (translationBundleId) {
+        const translationBundle = await TranslationBundle.findById(translationBundleId)
+        if(!translationBundle || !translationBundle.users.includes(decoded.id)) {
           throw new Forbidden('Forbidden resource');
         }
       }
@@ -39,6 +38,7 @@ const authenticate = async (req, res, next) => {
     if (TokenExpired) {
       throw new Unauthorized('Token is expired');
     }
+    console.log("Middleware good");
     req.user = user;
     next();
   } catch (error) {

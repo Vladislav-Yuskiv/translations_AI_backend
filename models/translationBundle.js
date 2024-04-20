@@ -1,19 +1,25 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
 
-const companySchema = Schema(
+const translationBundleSchema = Schema(
   {
     name: {
       type: String,
       required: [true, 'Name is required'],
     },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'user',
-    },
+    users: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+      }
+    ],
     description: {
       type: String,
       required: [true, 'Specify project description'],
+    },
+    category: {
+      type: String,
+      default: ""
     },
     apiKey: {
       type: String,
@@ -23,16 +29,16 @@ const companySchema = Schema(
   { versionKey: false, timestamps: true },
 );
 
-const schemaValidateCompany = Joi.object({
+const schemaValidateTranslationBundle = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
   user: Joi.string().required(),
 })
 
-const Company = model('company', companySchema);
+const TranslationBundle = model('translationBundle', translationBundleSchema);
 
 module.exports = {
-  Company,
-  companySchema,
-  schemaValidateCompany,
+  TranslationBundle: TranslationBundle,
+  translationBundleSchema,
+  schemaValidateTranslationBundle,
 };
