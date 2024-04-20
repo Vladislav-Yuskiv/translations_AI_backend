@@ -5,7 +5,7 @@ const { authenticate } = require('../../middlewares');
 const router = express.Router();
 
 router.get('/:userId', authenticate, ctrl.getUserById);
-
-// router.put('/:userId', authenticate, ctrl.updateUser);
+router.patch('/changePassword',authenticate, ctrl.changePassword)
+router.put('/:userId', authenticate, ctrl.updateUser);
 
 module.exports = router;

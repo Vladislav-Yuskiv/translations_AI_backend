@@ -2,12 +2,12 @@ const { TranslationKey } = require('../../models/translationKey');
 
 const postTranslationKey = async (req, res, next) => {
   try {
-    const {companyId} = req.params;
+    const {translationBundleId} = req.params;
 
     const payload = {
       name: req.body.name,
       description: req.body.description,
-      company: companyId,
+      translationBundle: translationBundleId,
     }
     const translationKey = await TranslationKey.create(payload);
     res.json(translationKey);

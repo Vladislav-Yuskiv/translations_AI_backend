@@ -2,8 +2,8 @@ const { TranslationKey } = require('../../models/translationKey');
 
 const getTranslationKeys = async (req, res, next) => {
   try {
-    const { companyId } = req.params
-    const translationKeys = await TranslationKey.find({ company: companyId });
+    const { translationBundleId } = req.params
+    const translationKeys = await TranslationKey.find({ translationBundle: translationBundleId });
     res.json(translationKeys);
   } catch (error) {
     next(error);
