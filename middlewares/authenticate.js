@@ -20,9 +20,10 @@ const authenticate = async (req, res, next) => {
     if (!user) {
       throw new NotFound('User not found');
     }
-    const {userId, translationBundleId} = req.params;
+    const {userId, translationBundleId , deleteUserInBundle = false} = req.params;
+    console.log(req.params);
     if(userId || translationBundleId) {
-      if (userId && decoded.id !== userId) {
+      if (userId && decoded.id !== userId && !deleteUserInBundle) {
         throw new Forbidden('Forbidden resource');
       }
       if (translationBundleId) {

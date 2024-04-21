@@ -2,7 +2,6 @@ const { TranslationBundle } = require('../../models/translationBundle');
 const { BadRequest } = require('http-errors');
 const deleteTranslationBundleId = async (req, res, next) => {
   try {
-    console.log("hereee");
     const { translationBundleId } = req.params;
 
     if(!translationBundleId){
