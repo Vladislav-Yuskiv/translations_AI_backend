@@ -5,6 +5,7 @@ const updateTranslationBundleId = require('./updateTranslationBundleId');
 const deleteTranslationBundleId = require('./deleteTranslationBundleId');
 const getUsersByBundleId = require('./getUsersByBundleId');
 const deleteUserInBundle = require('./deleteUserInBundle');
+const checkBundleTranslation = require('./checkBundleTranslation');
 
 module.exports = {
   postTranslationBundle,
@@ -14,4 +15,5 @@ module.exports = {
   deleteTranslationBundleId,
   getUsersByBundleId,
   deleteUserInBundle,
+  checkBundleTranslation
 };

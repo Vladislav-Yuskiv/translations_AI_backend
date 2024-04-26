@@ -15,6 +15,7 @@ router.get('/:translationBundleId', authenticate, ctrl.getTranslationBundleId);
 router.put('/:translationBundleId', authenticate, ctrl.updateTranslationBundleId);
 router.delete('/:translationBundleId', authenticate, ctrl.deleteTranslationBundleId);
 
+router.get('/:translationBundleId/checkTranslation', authenticate, ctrl.checkBundleTranslation);
 router.get('/:translationBundleId/users', authenticate, ctrl.getUsersByBundleId)
 router.delete('/:translationBundleId/:userId/:deleteUserInBundle', authenticate, ctrl.deleteUserInBundle)
 

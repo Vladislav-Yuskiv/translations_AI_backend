@@ -11,7 +11,6 @@ const getUsersByBundleId = async (req, res, next) => {
     }
     const users = await User.find({ _id: { $in: translationBundle.users } });
 
-    console.log(users);
     res.json({ users });
   } catch (error) {
     next(error);

@@ -15,13 +15,12 @@ const authenticate = async (req, res, next) => {
       throw new Unauthorized('Not authorized');
     }
     const decoded = jwt.verify(token, SECRET_KEY);
-    console.log(decoded.id);
     const user = await User.findById(decoded.id)
     if (!user) {
       throw new NotFound('User not found');
     }
     const {userId, translationBundleId , deleteUserInBundle = false} = req.params;
-    console.log(req.params);
+
     if(userId || translationBundleId) {
       if (userId && decoded.id !== userId && !deleteUserInBundle) {
         throw new Forbidden('Forbidden resource');
@@ -39,7 +38,7 @@ const authenticate = async (req, res, next) => {
     if (TokenExpired) {
       throw new Unauthorized('Token is expired');
     }
-    console.log("Middleware good");
+
     req.user = user;
     next();
   } catch (error) {

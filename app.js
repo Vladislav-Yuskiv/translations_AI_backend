@@ -5,8 +5,7 @@ require('dotenv').config();
 
 const usersRouter = require('./routes/api/users');
 const translationBundlesRouter = require('./routes/api/translationBundles/translationBundles');
-const authRouter = require('./routes/api/auth');
-const referenceRouter = require('./routes/api/referral');
+const authRouter = require('./routes/api/auth')
 const testRouter = require("./routes/test")
 
 const app = express();
@@ -17,7 +16,6 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-app.use('/reference',referenceRouter)
 app.use('/users', usersRouter);
 app.use('/bundles', translationBundlesRouter);
 app.use('/auth', authRouter);
