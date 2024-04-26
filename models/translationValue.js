@@ -11,6 +11,16 @@ const translationValueSchema = Schema(
       type: String,
       required: [true, 'Key description is required'],
     },
+    addedUser: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'user',
+    },
+    updatedUser: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'user',
+    },
     translation_key:{
       type: Schema.Types.ObjectId,
       required: [true, 'Specify translation_key'],
@@ -23,6 +33,8 @@ const translationValueSchema = Schema(
 const schemaValidateTranslationValue = Joi.object({
   value: Joi.string().required(),
   language: Joi.string().required(),
+  updatedUser: Joi.string().required(),
+  addedUser: Joi.string().required(),
   translation_key: Joi.string().required(),
 })
 

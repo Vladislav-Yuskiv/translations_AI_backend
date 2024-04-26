@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const TokenType = require('../../enums/TokenType');
 const { TranslationBundle } = require('../../models');
+const { createDefaultKeysAndValues } = require('../../utils');
 const { SECRET_KEY } = process.env;
 
 const signup = async (req, res, next) => {
@@ -36,13 +37,15 @@ const signup = async (req, res, next) => {
 
      }else{
        //create a default bundle
-      const test =  await TranslationBundle.create({
+      const defaultBundle =  await TranslationBundle.create({
          name: "Translation Bundle 1",
          description: "Your bundle description",
+         translatedLanguages: ["en"],
+         createdBy: newUser._id,
          users: [newUser._id]
        })
 
-       console.log("test",test);
+       await createDefaultKeysAndValues(defaultBundle._id,newUser._id)
      }
 
     res.status(201).json({

@@ -10,8 +10,10 @@ const router = express.Router({mergeParams: true});
 
 router.get('/', authenticate, ctrl.getTranslationKeys);
 
+router.get('/info', authenticate, ctrl.getTranslationKeysInformation);
+
 router.post('/', authenticate, ctrl.postTranslationKey);
 
-router.use('/:translationKeyId/translationValues', translationValueRouter)
+router.use('/values', translationValueRouter)
 
 module.exports = router;

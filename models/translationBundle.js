@@ -21,6 +21,17 @@ const translationBundleSchema = Schema(
       type: String,
       default: ""
     },
+    translatedLanguages: [
+      {
+        type: String,
+        required: true,
+      }
+    ],
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'user',
+    },
     apiKey: {
       type: String,
       default: '',
@@ -32,7 +43,10 @@ const translationBundleSchema = Schema(
 const schemaValidateTranslationBundle = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
-  user: Joi.string().required(),
+  category: Joi.string().required(),
+  translatedLanguages: Joi.array().required(),
+  createdBy: Joi.string().required(),
+  users:  Joi.array().required(),
 })
 
 const TranslationBundle = model('translationBundle', translationBundleSchema);

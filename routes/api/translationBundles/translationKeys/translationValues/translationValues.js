@@ -6,7 +6,7 @@ const { authenticate } = require('../../../../../middlewares');
 
 const router = express.Router({mergeParams: true});
 
-router.get('/', authenticate, ctrl.getTranslationValues);
+router.post('/', authenticate, ctrl.getTranslationValues);
 
 router.post('/', authenticate, ctrl.postTranslationValue);
 

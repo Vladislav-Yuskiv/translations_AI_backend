@@ -13,5 +13,5 @@ module.exports = {
   updateTranslationBundleId,
   deleteTranslationBundleId,
   getUsersByBundleId,
-  deleteUserInBundle
+  deleteUserInBundle,
 };

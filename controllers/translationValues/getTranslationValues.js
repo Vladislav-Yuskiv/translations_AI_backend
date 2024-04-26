@@ -1,9 +1,15 @@
-const { translationValue } = require('../../models/translationValue');
+const { TranslationValue } = require('../../models/translationValue');
 
 const getTranslationValues = async (req, res, next) => {
   try {
-    const { translationKeyId } = req.params
-    const translationValues = await translationValue.find({ translationKey: translationKeyId });
+    const { language } = req.query;
+    const { translationsKeysIds } = req.body;
+
+    const translationValues = await TranslationValue.find({
+      translation_key: { $in: translationsKeysIds },
+      language: language
+    })
+
     res.json(translationValues);
   } catch (error) {
     next(error);

@@ -11,6 +11,11 @@ const translationKeySchema = Schema(
       type: String,
       required: [true, 'Key description is required'],
     },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'user',
+    },
     translationBundle:{
       type: Schema.Types.ObjectId,
       required: [true, 'Specify related translationBundle'],
@@ -26,6 +31,7 @@ const schemaValidateTranslationKey = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
   translationBundle: Joi.string().required(),
+  createdBy: Joi.string().required(),
 })
 
 const TranslationKey = model('translationKey', translationKeySchema);
