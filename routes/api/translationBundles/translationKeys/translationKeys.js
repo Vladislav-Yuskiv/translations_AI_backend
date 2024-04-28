@@ -14,6 +14,8 @@ router.get('/info', authenticate, ctrl.getTranslationKeysInformation);
 
 router.post('/', authenticate, ctrl.postTranslationKey);
 
+router.delete('/:translationKeyId', authenticate, ctrl.deleteTranslationKey);
+
 router.use('/values', translationValueRouter)
 
 module.exports = router;

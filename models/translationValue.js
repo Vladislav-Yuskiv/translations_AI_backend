@@ -5,7 +5,6 @@ const translationValueSchema = Schema(
   {
     value: {
       type: String,
-      required: [true, 'Key name is required'],
     },
     language: {
       type: String,
@@ -31,7 +30,7 @@ const translationValueSchema = Schema(
 );
 
 const schemaValidateTranslationValue = Joi.object({
-  value: Joi.string().required(),
+  value: Joi.string().optional(),
   language: Joi.string().required(),
   updatedUser: Joi.string().required(),
   addedUser: Joi.string().required(),
