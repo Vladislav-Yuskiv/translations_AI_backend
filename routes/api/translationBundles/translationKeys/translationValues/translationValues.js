@@ -10,4 +10,6 @@ router.post('/', authenticate, ctrl.getTranslationValues);
 
 router.post('/', authenticate, ctrl.postTranslationValue);
 
+router.put('/:translationValueId', authenticate, ctrl.updateTranslationValue);
+
 module.exports = router;

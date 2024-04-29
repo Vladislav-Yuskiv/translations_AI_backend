@@ -6,19 +6,22 @@ async function createDefaultKeysAndValues(bundleId, userId){
       name: "Key example 1" ,
       description: 'Key description 1',
       translationBundle: bundleId,
-      createdBy: userId
+      createdBy: userId,
+      updatedBy: userId
     },
     {
       name: "Key example 2" ,
       description: 'Key description2',
       translationBundle: bundleId,
-      createdBy: userId
+      createdBy: userId,
+      updatedBy: userId
     },
     {
       name: "Key example 3" ,
       description: 'Key description 3',
       translationBundle: bundleId,
-      createdBy: userId
+      createdBy: userId,
+      updatedBy: userId
     },
   ];
 

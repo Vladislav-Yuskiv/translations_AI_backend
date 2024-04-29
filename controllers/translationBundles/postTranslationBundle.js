@@ -14,7 +14,9 @@ const postTranslationBundle = async (req, res, next) => {
 
     const translationBundle = await TranslationBundle.create(payload);
 
-    await createDefaultKeysAndValues(translationBundle._id,req.user.id)
+    if(req.body.createKeys){
+      await createDefaultKeysAndValues(translationBundle._id,req.user.id)
+    }
 
     res.json({
       message:`${req.body.name} was successfully created`,
