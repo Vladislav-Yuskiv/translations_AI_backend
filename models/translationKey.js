@@ -9,7 +9,6 @@ const translationKeySchema = Schema(
     },
     description: {
       type: String,
-      required: [true, 'Key description is required'],
     },
     createdBy: {
       type: Schema.Types.ObjectId,
@@ -34,7 +33,7 @@ translationKeySchema.index({ name: 1, translationBundle: 1 }, { unique: true });
 
 const schemaValidateTranslationKey = Joi.object({
   name: Joi.string().required(),
-  description: Joi.string().required(),
+  description: Joi.string(),
   updatedBy: Joi.string().required(),
   translationBundle: Joi.string().required(),
   createdBy: Joi.string().required(),

@@ -8,6 +8,8 @@ const deleteUserInBundle = require('./deleteUserInBundle');
 const checkBundleTranslation = require('./checkBundleTranslation');
 const addNewLanguage = require('./addNewLanguage');
 const deleteLanguageFromBundle = require('./deleteLanguageFromBundle');
+const getTranslationBundleDownloadInfo = require('./getTranslationBundleDownloadInfo');
+const getInfoBySearch = require('./getInfoBySearch');
 
 module.exports = {
   postTranslationBundle,
@@ -19,5 +21,7 @@ module.exports = {
   deleteUserInBundle,
   checkBundleTranslation,
   addNewLanguage,
-  deleteLanguageFromBundle
+  deleteLanguageFromBundle,
+  getTranslationBundleDownloadInfo,
+  getInfoBySearch
 };

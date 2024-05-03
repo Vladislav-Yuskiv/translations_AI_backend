@@ -10,7 +10,7 @@ const getTranslationKeys = async (req, res, next) => {
     const startIndex = (page - 1) * limit;
 
     const translationKeys = await TranslationKey.find({ translationBundle: translationBundleId })
-      .sort({ createdAt: 1 })
+      .sort({ createdAt: -1 })
       .limit(limit)
       .skip(startIndex);
 

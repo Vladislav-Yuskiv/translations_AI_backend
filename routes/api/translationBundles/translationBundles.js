@@ -14,6 +14,8 @@ router.get('/', authenticate, ctrl.getTranslationBundles);
 router.post('/', authenticate, ctrl.postTranslationBundle);
 
 router.get('/:translationBundleId', authenticate, ctrl.getTranslationBundleId);
+router.get('/:translationBundleId/download', authenticate, ctrl.getTranslationBundleDownloadInfo);
+router.get('/:translationBundleId/:language/search', authenticate, ctrl.getInfoBySearch);
 router.put('/:translationBundleId', authenticate, ctrl.updateTranslationBundleId);
 router.delete('/:translationBundleId', authenticate, ctrl.deleteTranslationBundleId);
 
