@@ -21,13 +21,13 @@ const getInfoBySearch = async (req, res, next) => {
       ]
     });
 
+
     const keysMap = new Map(keys.map(key => [key._id.toString(), key]));
     const keysIds = keys.map(key => key._id)
     const matchValues = await TranslationValue.find({
       translation_key: { $in: keysIds },
       language: language,
     })
-
 
    const res1 =  matchValues.map(valueKey => {
 

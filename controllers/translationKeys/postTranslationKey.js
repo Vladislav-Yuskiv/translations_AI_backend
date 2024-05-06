@@ -1,18 +1,24 @@
 const { TranslationKey } = require('../../models/translationKey');
 const { TranslationValue } = require('../../models');
-const { BadRequest } = require('http-errors');
+const { BadRequest, Conflict } = require('http-errors');
 
 const postTranslationKey = async (req, res, next) => {
   try {
     const {translationBundleId} = req.params;
 
     if(!translationBundleId){
-      return new BadRequest("Invalid params")
+      throw new BadRequest("Invalid params")
+    }
+
+    const existingKey = await TranslationKey.findOne({ name:req.body.name, translationBundle: translationBundleId });
+
+    if(existingKey){
+      throw  new Conflict("Keys need to be unique in one bundle");
     }
 
     const payload = {
-      name: req.body.name,
-      description: req.body.description,
+      name: req.body.name.trim(),
+      description: req.body.description.trim(),
       translationBundle: translationBundleId,
       updatedBy: req.body.userId,
       createdBy: req.body.userId,
